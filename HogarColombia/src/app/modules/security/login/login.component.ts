@@ -30,7 +30,10 @@ export class LoginComponent implements OnInit {
     else{
       alert("go to login")
     }
+  }
 
+  get fg(){
+    return this.fgValidation.controls;
   }
 
 

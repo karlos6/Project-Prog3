@@ -4,23 +4,48 @@
     <form [formGroup]="fgValidation" (ngSubmit)="loginEvent()" class="login-form">
       <div class="row">
       </div>
+
+      <!-- username -->
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">mail_outline</i>
-          <input class="validate" id="username" type="email">
+          <input class="validate" formControlName="username" id="username" type="email">
           <label for="username" data-error="wrong" data-success="right">Username</label>
+
+          <!-- validaciones username -->
+          <div *ngIf="fg.username.errors && (fg.username.dirty || fg.username.touched)" class="warning-validation">
+            <!-- tipos de errores -->
+            <strong *ngIf="fg.username.errors.required">Username is required!</strong>
+            <strong *ngIf="fg.username.errors.minlength">Username must be at least 5 char!</strong>
+            <strong *ngIf="fg.username.errors.maxlength">Username must be up to 20 char!</strong>
+            <strong *ngIf="fg.username.errors.email">Username must be an email!</strong>
+          </div>
+
         </div>
       </div>
+
+      <!-- password -->
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">lock_outline</i>
-          <input id="password" type="password">
+          <input formControlName="password" id="password" type="password">
           <label for="password">Password</label>
+
+          <!-- validaciones password -->
+          <div *ngIf="fg.password.errors && (fg.password.dirty || fg.password.touched)" class="warning-validation">
+              <!-- tipos de errores -->
+              <strong *ngIf="fg.password.errors.required">Username is required!</strong>
+              <strong *ngIf="fg.password.errors.minlength">Username must be at least 4 char!</strong>
+              <strong *ngIf="fg.password.errors.maxlength">Username must be up to 10 char!</strong>
+            </div>
+
         </div>
       </div>
+
+      <!-- Boton de envio -->
       <div class="row">
         <div class="input-field col s12">
-          <button class="btn waves-effect waves-light blue col s12" type="submit">Login
+          <button [disabled]="fg.username.errors || fg.password.errors" class="btn waves-effect waves-light blue col s12" type="submit">Login
           </button>
         </div>
       </div>
